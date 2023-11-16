@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-
+const projectController = require("./app/controllers/project.controller")
 const app = express();
 
 var corsOptions = {
@@ -22,11 +22,11 @@ db.sequelize.sync();
 
 require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);
-
+require('./app/routes/project.routes')(app)
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
+  res.json({ message: "Welcome to the application." });
 });
 
 // set port, listen for requests
