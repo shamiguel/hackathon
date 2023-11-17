@@ -3,16 +3,24 @@ const Project = db.project;
 
 const createProject = async (req, res) => {
     try {
-      const project = await Project.create({
-        title: req.body.title,
-        description: req.body.description,
-        tech: req.body.tech,
-        
-   /*      imageType: req.file.mimetype,
-        imageName: req.file.originalname,
-        imageData: req.file.buffer, */
-      });
-  
+        let project;
+        if(req.file){
+            project = await Project.create({
+                title: req.body.title,
+                description: req.body.description,
+                tech: req.body.tech,
+                
+                imageType: req.file.mimetype,
+                imageName: req.file.originalname,
+                imageData: req.file.buffer,
+              });
+        }else{
+             project = await Project.create({
+                title: req.body.title,
+                description: req.body.description,
+                tech: req.body.tech,
+            });
+        }
       return res.status(201).json({ project });
     } catch (error) {
       console.error(error);
