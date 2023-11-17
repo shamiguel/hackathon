@@ -6,9 +6,6 @@ module.exports = (sequelize, Sequelize) => {
       tech: {
         type: Sequelize.ARRAY(Sequelize.STRING)
       },
-      image: {
-        type: Sequelize.STRING
-      },
       description: {
         type: Sequelize.STRING
       },

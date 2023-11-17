@@ -6,12 +6,11 @@ const createProject = async (req, res) => {
       const project = await Project.create({
         title: req.body.title,
         description: req.body.description,
-        userId: req.body.userId,
-  
+        tech: req.body.tech,
         
-        imageType: req.file.mimetype,
+   /*      imageType: req.file.mimetype,
         imageName: req.file.originalname,
-        imageData: req.file.buffer,
+        imageData: req.file.buffer, */
       });
   
       return res.status(201).json({ project });
@@ -26,8 +25,12 @@ const createProject = async (req, res) => {
       const projects = await Project.findAll();
   
       const updatedProjects = projects.map((project) => {
-        const projectImage = project.imageData.toString('base64');
-        return { ...project, imageData: projectImage };
+        if(project.imageData){
+            const projectImage = project.imageData.toString('base64');
+            return { ...project, imageData: projectImage };
+        }else{
+            return {...project}
+        }
       });
   
       return res.status(200).json({ projects: updatedProjects });
