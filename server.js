@@ -4,7 +4,7 @@ const projectController = require("./app/controllers/project.controller")
 const app = express();
 
 var corsOptions = {
-  origin: "http://localhost:8081"
+  origin: "http://localhost:8080/"
 };
 
 app.use(cors(corsOptions));
@@ -26,7 +26,8 @@ require('./app/routes/project.routes')(app)
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to the application." });
+    res.set('Access-Control-Allow-Origin', 'http://localhost:4200')
+    res.json({ message: "Welcome to the application." });
 });
 
 // set port, listen for requests
