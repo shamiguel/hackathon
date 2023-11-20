@@ -4,7 +4,8 @@ const projectController = require("./app/controllers/project.controller")
 const app = express();
 
 var corsOptions = {
-  origin: "http://localhost:8080"
+  origin: ["http://localhost:8080","http://localhost:4200"],
+
 };
 
 app.use(cors(corsOptions));

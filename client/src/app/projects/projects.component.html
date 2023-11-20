@@ -12,7 +12,31 @@
         </div>
 
         <div class="project-form"*ngIf="isEditing; else display">
-            <div class=""></div>
+            <h2>Add a Project</h2>
+            <form [formGroup]="projectForm" (submit)="submitProject()">
+                <label for="">Title</label>
+                <input formControlName="projectTitle" type="text" name="title">
+                <br>
+                <label for="">Description</label>
+                <input formControlName="projectDescription" type="text" name="desc">
+                <br>
+                <div>
+                    <label for="">Tech</label>
+                    <input type="text" name="addTech" id="addTechInput">
+                    <button type="button" (click)="$event.preventDefault; addTech()">Add Tech</button>
+                    <br>
+                    <div id="techChoices" *ngFor="let tech of techValues">
+                        <li>{{tech}}</li>
+                    </div>
+                    <input type="hidden" formControlName="projectTech" name="tech" value="{{techValues}}">
+
+                </div>
+                <br>
+                <label for="">URL</label>
+                <input formControlName="projectUrl" type="url" name="url">
+                <br>
+                <button type="submit">Submit</button>
+            </form>
         </div>
 
         <ng-template #display>

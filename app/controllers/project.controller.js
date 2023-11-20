@@ -3,31 +3,22 @@ const Project = db.project;
 
 const createProject = async (req, res) => {
     try {
-        let project;
-        if(req.file){
-            project = await Project.create({
-                title: req.body.title,
-                description: req.body.description,
-                tech: req.body.tech,
-                
-                imageType: req.file.mimetype,
-                imageName: req.file.originalname,
-                imageData: req.file.buffer,
+      console.log("*******************************WE GOT:", req.body)
+        let project = await Project.create({
+                title: req.body.projectTitle,
+                description: req.body.projectDescription,
+                tech: req.body.projectTech,
+                github: req.body.projectUrl
               });
-        }else{
-             project = await Project.create({
-                title: req.body.title,
-                description: req.body.description,
-                tech: req.body.tech,
-            });
-        }
       return res.status(201).json({ project });
     } catch (error) {
       console.error(error);
       return res.status(500).json({ error: error.message });
     }
   };
-  
+
+
+
   const getAllProjects = async (req, res) => {
     try {
       const projects = await Project.findAll();

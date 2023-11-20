@@ -9,14 +9,8 @@ module.exports = (sequelize, Sequelize) => {
       description: {
         type: Sequelize.STRING
       },
-      imageType: {
+      github:{
         type: Sequelize.STRING
-      },
-      ImageName: {
-        type: Sequelize.STRING
-      },
-      ImageDate: {
-        type: Sequelize.BLOB('long')
       }
     });
   
