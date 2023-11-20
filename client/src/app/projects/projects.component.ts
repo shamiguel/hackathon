@@ -10,4 +10,14 @@ import { CommonModule } from '@angular/common';
 })
 export class ProjectsComponent {
 
+  constructor(){
+    this.isEditing = false;
+  }
+
+  isEditing: boolean; 
+
+  toggleEditing(){
+    console.log(`toggling isEditing to ${this.isEditing}`)
+    this.isEditing = !this.isEditing
+  }
 }

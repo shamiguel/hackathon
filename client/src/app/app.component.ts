@@ -9,6 +9,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { TitleComponent } from './title/title.component';
 import { AboutComponent } from './about/about.component';
 import { ProjectsComponent } from './projects/projects.component';
+import { ContactComponent } from './contact/contact.component';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,8 @@ import { ProjectsComponent } from './projects/projects.component';
     NavbarComponent, 
     TitleComponent,
     AboutComponent,
-    ProjectsComponent
+    ProjectsComponent,
+    ContactComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
