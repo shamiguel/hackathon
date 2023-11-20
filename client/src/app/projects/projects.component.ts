@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { ProjectService } from './project.service';
+import { IProject } from '../../shared/models/project';
 @Component({
   selector: 'app-projects',
   standalone: true,
@@ -10,15 +11,29 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.sass'
 })
-export class ProjectsComponent {
+export class ProjectsComponent implements OnInit{
+  //@Input() projects : Project[] = [];
+  //@Output() addProject = new EventEmitter<Project>();
+  projects: IProject[] = [];
+  isEditing: boolean; 
+  techValues: string[];
 
-  constructor(private http: HttpClient){
+  constructor(private projectService: ProjectService, private http: HttpClient){
     this.isEditing = false;
     this.techValues = [];
   }
 
-  isEditing: boolean; 
-  techValues: string[];
+  ngOnInit(): void {
+   this.getProjects();
+  }
+
+  getProjects(): void{
+    this.projectService.getAll()
+    .subscribe(projects => {
+      console.log(projects)
+      this.projects = projects
+    })
+  }
 
   toggleEditing(){
     console.log(`toggling isEditing to ${this.isEditing}`)
@@ -36,7 +51,7 @@ export class ProjectsComponent {
     projectTitle: new FormControl('', Validators.required),
     projectDescription: new FormControl('', Validators.required),
     projectTech: new FormControl([''], Validators.required),
-    projectUrl: new FormControl(''),
+    projectUrl: new FormControl('', Validators.required),
 
   })
 
@@ -57,6 +72,7 @@ export class ProjectsComponent {
     this.http.post(url, this.projectForm.value, httpOptions)
     .subscribe(response => {
       console.log('Post request successful:', response);
+      //this.addProject.emit(new Project(projectTitle: response.title, ))
       
     }, error=>{
       console.error("Post request error:", error)

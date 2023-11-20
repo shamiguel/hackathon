@@ -1,7 +1,9 @@
 <section id="project" class="projects">
     <h1>Projects</h1>
     <div class="project-org">
-        
+        <div *ngFor="let project of projects">
+            <div>{{project.projectTitle}}</div>
+        </div>
         <div class="project-select">
         <button (click)="toggleEditing()">Edit</button>
         <ul >
@@ -35,7 +37,11 @@
                 <label for="">URL</label>
                 <input formControlName="projectUrl" type="url" name="url">
                 <br>
-                <button type="submit">Submit</button>
+                <button 
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="projectForm.invalid || techValues.length < 1"
+                >Submit</button>
             </form>
         </div>
 
