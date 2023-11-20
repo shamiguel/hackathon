@@ -5,11 +5,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './api.service';
 import { Router } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, HttpClientModule],
+  imports: [CommonModule, RouterOutlet, HttpClientModule, NavbarComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
@@ -27,43 +28,19 @@ export class AppComponent implements OnInit {
       this.router.navigate(["/"])
       this.apiService.getMessage().subscribe(data => { 
           this.message = data; 
+          console.log(this.message)
       }); 
   } 
 
-  scrollToTitle(){
-    let title:any = document.getElementById("title")
-    title.
+
+  scrollInnerElement(id:string, parentId:string){
+    //get parent element, scroll to that, then scroll to the element
+    let elem:any = document.getElementById(id)
+    elem.
     scrollIntoView({
       behavior: "smooth",
       block: "end",
-      inline: "nearest"
-    })
-  }
-  scrollToAbout(){
-    let title:any = document.getElementById("about")
-    title.
-    scrollIntoView({
-      behavior: "smooth",
-      block: "end",
-      inline: "nearest"
-    })
-  }
-  scrollToProjects(){
-    let title:any = document.getElementById("project")
-    title.
-    scrollIntoView({
-      behavior: "smooth",
-      block: "end",
-      inline: "nearest"
-    })
-  }
-  scrollToContact(){
-    let title:any = document.getElementById("contact")
-    title.
-    scrollIntoView({
-      behavior: "smooth",
-      block: "end",
-      inline: "nearest"
+      inline: "start"
     })
   }
 }

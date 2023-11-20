@@ -1,16 +1,5 @@
 <div class="container">
-  <div class="navigation">
-    <div class="nav-container">
-      <nav>
-        <ul class="nav-list">
-          <li (click)="scrollToTitle()"><a href="#!">Shami</a></li>
-          <li (click)="scrollToAbout()"><a href="#!">About</a></li>
-          <li (click)="scrollToProjects()"><a href="#!">Projects</a></li>
-          <li (click)="scrollToContact()"><a href="#!">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </div>
+  <app-navbar></app-navbar>
   <div class="main">
     <section id="title" class="title">
       <div>
@@ -35,17 +24,12 @@
       <div class="project-org">
         <div class="project-select">
           <ul >
-            <li>
-              Project 1
-            </li>
-            <li>
-              Project 2
-            </li>
-            <li>
-              Project 3
-            </li>
+            <li (click)="scrollInnerElement('pr1', 'projects')"><a href="#!">Project 1</a></li>
+            <li (click)="scrollInnerElement('pr2', 'projects')"><a href="#!">Project 2</a></li>
+            <li (click)="scrollInnerElement('pr3','projects')"><a href="#!">Project 3</a></li>
           </ul>
         </div>
+        
         <div class="project-container">
           <div id="pr1" class="project-card">
             <h2>Portfolio</h2>
@@ -58,7 +42,6 @@
               <li>Angular | SASS </li>
             </ul>
           </div>
-          <br>
           <div id="pr2" class="project-card">
             <h2>Rails World Conference</h2>
             <p>Conference schedule organizer app, comissioned by the Rails Foundation with oversight from The Agency of Learning.</p>
@@ -72,18 +55,17 @@
               </li>
             </ul>
           </div>
-        <br>
-        <div id="pr3" class="project-card">
-          <h2>CASA</h2>
-          <p>Ruby For Good's volunteer activty tracker app for Court Appointed Special Advocate organizations.</p>
-          <h3>Tech</h3>
-          <ul>
-            <li>
-              Node.Js | Express | Postgress
-            </li>
-            <li>Angular | SASS </li>
-          </ul>
-        </div>
+          <div id="pr3" class="project-card">
+            <h2>CASA</h2>
+            <p>Ruby For Good's volunteer activty tracker app for Court Appointed Special Advocate organizations.</p>
+            <h3>Tech</h3>
+            <ul>
+              <li>
+                Node.Js | Express | Postgress
+              </li>
+              <li>Angular | SASS </li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
