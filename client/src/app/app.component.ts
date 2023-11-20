@@ -6,11 +6,20 @@ import { ApiService } from './api.service';
 import { Router } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
+import { TitleComponent } from './title/title.component';
+import { AboutComponent } from './about/about.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, HttpClientModule, NavbarComponent],
+  imports: [
+    CommonModule, 
+    RouterOutlet, 
+    HttpClientModule, 
+    NavbarComponent, 
+    TitleComponent,
+    AboutComponent
+  ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
