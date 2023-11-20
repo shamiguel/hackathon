@@ -8,6 +8,7 @@ import { ViewportScroller } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
 import { TitleComponent } from './title/title.component';
 import { AboutComponent } from './about/about.component';
+import { ProjectsComponent } from './projects/projects.component';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,8 @@ import { AboutComponent } from './about/about.component';
     HttpClientModule, 
     NavbarComponent, 
     TitleComponent,
-    AboutComponent
+    AboutComponent,
+    ProjectsComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
@@ -40,16 +42,4 @@ export class AppComponent implements OnInit {
           console.log(this.message)
       }); 
   } 
-
-
-  scrollInnerElement(id:string, parentId:string){
-    //get parent element, scroll to that, then scroll to the element
-    let elem:any = document.getElementById(id)
-    elem.
-    scrollIntoView({
-      behavior: "smooth",
-      block: "end",
-      inline: "start"
-    })
-  }
 }

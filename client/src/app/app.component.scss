@@ -5,30 +5,3 @@
 :target{
     scroll-margin-top: 10rem;
 }
-.projects{
-    display: flex;
-    flex-direction: column;
-    scroll-margin-top: 700px;
-}
-.project-select{
-    width:40%;
-    height: 100%;
-    padding-top: 40px;
-    align-items: center;
-    border:#0A3EA6;
-    border-style: dashed;
-}
-.project-org{
-    display: flex;
-    flex-direction: row;
-    overflow: hidden;
-}
-.project-container{
-  overflow-y: auto;
-}
-.project-card{
-   padding: 10px;
-   height: 650px;
-   border:#0A3EA6;
-    border-style: dashed;
-}
