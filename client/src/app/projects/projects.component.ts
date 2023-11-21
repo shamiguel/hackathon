@@ -32,7 +32,6 @@ export class ProjectsComponent implements OnInit{
     this.projectService.getAll()
     .subscribe((projects:any) => {
       for(const item of projects){
-        console.log(item)
         const data = item.dataValues 
         const project = new IProject(data.title, data.description, data.tech, data.github)
         this.projects.push(project)
@@ -75,10 +74,13 @@ export class ProjectsComponent implements OnInit{
     };
 
     this.http.post(url, this.projectForm.value, httpOptions)
-    .subscribe(response => {
+    .subscribe((response:any) => {
       console.log('Post request successful:', response);
-      this.getProjects();
-      
+      const newProject = new IProject(response.project.title, response.project.description, response.project.tech, response.project.github)
+      console.log(newProject)
+      this.projects.push(newProject)
+      this.projectForm.reset();
+      this.isAdding = false;
     }, error=>{
       console.error("Post request error:", error)
     })
