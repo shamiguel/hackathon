@@ -29,9 +29,13 @@ export class ProjectsComponent implements OnInit{
 
   getProjects(): void{
     this.projectService.getAll()
-    .subscribe(projects => {
-      console.log(projects)
-      this.projects = projects
+    .subscribe((projects:any) => {
+      for(const item of projects){
+        console.log(item)
+        const data = item.dataValues 
+        const project = new IProject(data.title, data.description, data.tech, data.github)
+        this.projects.push(project)
+      }
     })
   }
 
