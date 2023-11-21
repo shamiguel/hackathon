@@ -33,7 +33,7 @@ export class ProjectsComponent implements OnInit{
     .subscribe((projects:any) => {
       for(const item of projects){
         const data = item.dataValues 
-        const project = new IProject(data.title, data.description, data.tech, data.github)
+        const project = new IProject(data.id, data.title, data.description, data.tech, data.github)
         this.projects.push(project)
       }
     })
@@ -50,6 +50,9 @@ export class ProjectsComponent implements OnInit{
     this.techValues.push(input.value)
     input.value = "";
   }
+  removeTech(tech:String){
+    this.techValues = this.techValues.filter((item) => item !== tech)
+  }
 
   projectForm = new FormGroup({
     projectTitle: new FormControl('', Validators.required),
@@ -65,24 +68,31 @@ export class ProjectsComponent implements OnInit{
     this.projectForm.value.projectTech = this.techValues
 
     console.log("final:", this.projectForm.value)
-    const url = "http://localhost:8080/api/auth/projects"
 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-      })
-    };
 
-    this.http.post(url, this.projectForm.value, httpOptions)
+    this.projectService.create(this.projectForm.value)
     .subscribe((response:any) => {
       console.log('Post request successful:', response);
-      const newProject = new IProject(response.project.title, response.project.description, response.project.tech, response.project.github)
+      const newProject = new IProject(response.project.id, response.project.title, response.project.description, response.project.tech, response.project.github)
       console.log(newProject)
       this.projects.push(newProject)
       this.projectForm.reset();
       this.isAdding = false;
     }, error=>{
       console.error("Post request error:", error)
+    })
+  }
+
+  updateProject(project:any){
+    console.log("update:", project)
+    this.projectService.update(project)
+    .subscribe((response:any)=>{
+      console.log('Project updated successfully:', response);
+      project.projectTitle = response.project.title;
+      project.projectDescription = response.project.description;
+      project.projectTech = response.project.tech;
+      project.projectUrl = response.project.github;
+      console.log("Updated exisiting Item: ", project)
     })
   }
 }

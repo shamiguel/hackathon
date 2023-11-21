@@ -3,7 +3,6 @@ const Project = db.project;
 
 const createProject = async (req, res) => {
     try {
-      console.log("*******************************WE GOT:", req.body)
         let project = await Project.create({
                 title: req.body.projectTitle,
                 description: req.body.projectDescription,
@@ -16,8 +15,6 @@ const createProject = async (req, res) => {
       return res.status(500).json({ error: error.message });
     }
   };
-
-
 
   const getAllProjects = async (req, res) => {
     try {
@@ -38,8 +35,40 @@ const createProject = async (req, res) => {
       return res.status(500).json({ error: error.message });
     }
   };
+
+  const updateProject = async (req, res) => {
+    try {
+      console.log("*************updating...",req.body)
+        let id = req.params.id 
+        let project = await Project.findByPk(id);
+        const updated = await project.update({
+          title: req.body.projectTitle,
+          description: req.body.projectDescription,
+          tech: req.body.projectTech,
+          github: req.body.projectUrl
+        });
+      return res.status(201).json({ updated });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: error.message });
+    }
+  };
+
+  const deleteProject = async (req, res) => {
+    try{
+      await Project.destroy({
+        where: {id: req.params.id}
+      });
+      return res.status(201)
+    }catch{
+      console.error(error);
+      return res.status(500).json({ error: error.message});
+    }
+  }
   
   module.exports = {
     createProject,
     getAllProjects,
+    updateProject,
+    deleteProject
   };

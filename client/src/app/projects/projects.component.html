@@ -25,7 +25,7 @@
                     <button type="button" (click)="$event.preventDefault; addTech()">Add Tech</button>
                     <br>
                     <div id="techChoices" *ngFor="let tech of techValues">
-                        <li>{{tech}}</li>
+                        <li>{{tech}} <button type="button" (click)="removeTech(tech)">X</button></li>
                     </div>
                     <input type="hidden" formControlName="projectTech" name="tech" value="{{techValues}}">
 
@@ -47,6 +47,9 @@
             <app-project-card
             *ngFor="let project of projects"
             [project]="project"
+            [updateProject]="updateProject"
+            [addTech]="addTech"
+            [removeTech]="removeTech"
             >
             </app-project-card>
         </div>

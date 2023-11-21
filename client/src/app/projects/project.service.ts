@@ -22,14 +22,19 @@ export class ProjectService {
     console.log(this.http.get<IProject[]>(baseUrl, httpOptions))
     return this.http.get(baseUrl, httpOptions).pipe(map((data:any) => {
       return data.projects
-    }))/* .subscribe(result => {
-      for(const project of result){
-        console.log(project)
-      }
-    }) */
+    }))
   }
 
   create(data: any): Observable<any>{
     return this.http.post(baseUrl, data, httpOptions);
+  }
+
+  update(data: any): Observable<any>{
+    console.log(data.value)
+    return this.http.put(baseUrl + `/${data.value.id}`, data.value, httpOptions);
+  }
+
+  destroy(id:any): Observable<any>{
+    return this.http.delete(baseUrl + `/${id}`, httpOptions)
   }
 }

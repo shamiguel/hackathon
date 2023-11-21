@@ -1,5 +1,6 @@
-<div class="project-card">
+<div class="project-card" *ngIf="!isEditing else edit">
     <h2>{{project.projectTitle}}</h2>
+    <button type="button" (click)="isEditing = !isEditing">Update?</button>
     <p>{{project.projectDescription}}</p>
     <h3>Tech</h3>
     <ul>
@@ -10,3 +11,26 @@
     <i class="fa fa-github" style="font-size:48px;color:red"></i>
     </a>
 </div>
+
+
+<ng-template #edit>
+<div class="project-card">
+    <form action="" (submit)="submitEdit()" [formGroup]="projectEditForm">
+    <h2>Editing: {{project.projectTitle}}</h2>
+    <button type="button" (click)="isEditing = !isEditing">Cancel?</button>
+    <input type="text" formControlName="projectTitle" placeholder={{project.projectTitle}}>
+
+    <input type="text" formControlName="projectDescription" placeholder={{project.projectDescription}}>
+    <h3>Tech</h3>
+        <input type="text" name="addTech" id="addTechInput">
+        <button type="button" (click)="$event.preventDefault; addTech()">Add Tech</button>
+        <br>
+        <div id="techChoices" *ngFor="let tech of techValues">
+            <li>{{tech}} <button type="button"(click)="removeTech(tech)">X</button></li>
+        </div>
+        <input type="hidden" formControlName="projectTech" name="tech" value="{{techValues}}">
+        <i class="fa fa-github" style="font-size:48px;color:red"></i><input type="text" formControlName="projectUrl" placeholder={{project.projectUrl}}>
+    <button type="submit">Submit Edits</button>
+</form>
+</div>
+</ng-template>
