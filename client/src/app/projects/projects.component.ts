@@ -76,7 +76,7 @@ export class ProjectsComponent implements OnInit{
     this.http.post(url, this.projectForm.value, httpOptions)
     .subscribe(response => {
       console.log('Post request successful:', response);
-      //this.addProject.emit(new Project(projectTitle: response.title, ))
+      this.getProjects();
       
     }, error=>{
       console.error("Post request error:", error)
