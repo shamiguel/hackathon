@@ -4,22 +4,23 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ProjectService } from './project.service';
 import { IProject } from '../../shared/models/project';
+import { ProjectCardComponent } from './project-card/project-card.component';
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, ProjectCardComponent],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.sass'
 })
 export class ProjectsComponent implements OnInit{
   //@Input() projects : Project[] = [];
   //@Output() addProject = new EventEmitter<Project>();
-  projects: IProject[] = [];
-  isEditing: boolean; 
+  @Input() projects: IProject[] = [];
+  isAdding: boolean; 
   techValues: string[];
 
   constructor(private projectService: ProjectService, private http: HttpClient){
-    this.isEditing = false;
+    this.isAdding = false;
     this.techValues = [];
   }
 
@@ -39,9 +40,9 @@ export class ProjectsComponent implements OnInit{
     })
   }
 
-  toggleEditing(){
-    console.log(`toggling isEditing to ${this.isEditing}`)
-    this.isEditing = !this.isEditing
+  toggleAdding(){
+    console.log(`toggling isAdding to ${this.isAdding}`)
+    this.isAdding = !this.isAdding
   }
 
   addTech(){

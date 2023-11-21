@@ -1,0 +1,12 @@
+<div class="project-card">
+    <h2>{{project.projectTitle}}</h2>
+    <p>{{project.projectDescription}}</p>
+    <h3>Tech</h3>
+    <ul>
+        <li *ngFor="let tech of project.projectTech">
+            {{tech}}</li>
+    </ul>
+    <a href={{project.projectUrl}}>
+    <i class="fa fa-github" style="font-size:48px;color:red"></i>
+    </a>
+</div>
