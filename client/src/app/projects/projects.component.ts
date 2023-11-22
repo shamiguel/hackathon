@@ -19,10 +19,15 @@ export class ProjectsComponent implements OnInit{
   @Input() projects: IProject[] = [];
   isAdding: boolean; 
   techValues: string[];
+  selectedProject: IProject = this.projects[0];
 
   constructor(private projectService: ProjectService, private http: HttpClient, @Inject(EventEmitter) private eventEmitter: EventEmitter<IProject>){
     this.isAdding = false;
     this.techValues = [];
+  }
+
+  toggleSelectedProject(project:IProject){
+    this.selectedProject = project;
   }
 
   addUpdatedItem(updatedProject:IProject){
@@ -54,6 +59,8 @@ export class ProjectsComponent implements OnInit{
         const data = item.dataValues 
         const project = new IProject(data.id, data.title, data.description, data.tech, data.github)
         this.projects.push(project)
+        //can only initialize like this for some reason?
+        this.selectedProject = project
       }
     })
   }

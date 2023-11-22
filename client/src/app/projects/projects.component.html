@@ -5,7 +5,7 @@
         <button (click)="toggleAdding()">Add</button>
         <ul>
             <li *ngFor="let project of projects">
-                <a href="#!">{{project.projectTitle}}</a>
+                <h3 (click)="toggleSelectedProject(project)">{{project.projectTitle}}</h3>
             </li>
         </ul>
         </div>
@@ -43,13 +43,12 @@
         </div>
 
         <ng-template #display>
-        <div class="project-container">
+        <div *ngIf="selectedProject" class="project-container">
             <app-project-card
             [projects]="projects"
             (change)="addUpdatedItem($event)"
             (delete)="removeDeletedItem($event)"
-            *ngFor="let project of projects"
-            [project]="project"
+            [project]="selectedProject"
             [updateProject]="updateProject"
             [addTech]="addTech"
             [removeTech]="removeTech"
