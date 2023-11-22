@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IProject } from '../../../shared/models/project';
 import { FormControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -15,7 +15,8 @@ export class ProjectCardComponent implements OnInit{
   @Input() updateProject!: (project:any) => void;
   @Input() addTech!:() => void;
   @Input() removeTech!:(tech:string) => void;
-
+  @Input() projects! : any[];
+  @Output() change: EventEmitter<IProject> =  new EventEmitter<IProject>();
   isEditing = false;
   techValues:any;
   projectEditForm: FormGroup;
@@ -28,30 +29,38 @@ export class ProjectCardComponent implements OnInit{
       projectDescription: new FormControl('', Validators.required),
       projectTech: new FormControl([], Validators.required),
       projectUrl: new FormControl('', Validators.required),
-  
+      
     });
-    this.projectEditForm.controls["id"].setValue(this.project.id)
-    this.projectEditForm.controls["projectTitle"].setValue(this.project.projectTitle)
-    this.projectEditForm.controls["projectDescription"].setValue(this.project.projectDescription)
-    this.projectEditForm.controls["projectTech"].setValue(this.project.projectTech)
-    this.projectEditForm.controls["projectUrl"].setValue(this.project.projectUrl)
+    this.setProjectEditForm()
+    console.log(this.projectEditForm.value)
+    
   }
   constructor(private fb: FormBuilder, private projectService: ProjectService){ 
     this.projectEditForm = this.fb.group({})
   }
 
   submitEdit(){
+    console.log(this.projects)
     this.projectEditForm.value.projectTech = this.techValues
     console.log(this.projectEditForm.value)
     this.projectService.update(this.projectEditForm)
     .subscribe((data:any) => {
-      console.log(data.updated.id)
       const response = data.updated
-      const updated = new IProject(response.id, response.title, response.description, response.tech, response.url)
-      this.project = updated
+      const updatedProject = new IProject(response.id, response.title, response.description, response.tech, response.github)
+      console.log(updatedProject)
+      this.change.emit(updatedProject)
     })
     this.projectEditForm.reset()
     this.isEditing = false; 
+    this.setProjectEditForm();
+  }
+
+  setProjectEditForm(){
+    this.projectEditForm.controls["id"].setValue(this.project.id)
+    this.projectEditForm.controls["projectTitle"].setValue(this.project.projectTitle)
+    this.projectEditForm.controls["projectDescription"].setValue(this.project.projectDescription)
+    this.projectEditForm.controls["projectTech"].setValue(this.project.projectTech)
+    this.projectEditForm.controls["projectUrl"].setValue(this.project.projectUrl)
   }
 
 }

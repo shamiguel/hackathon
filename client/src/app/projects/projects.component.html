@@ -45,6 +45,8 @@
         <ng-template #display>
         <div class="project-container">
             <app-project-card
+            [projects]="projects"
+            (change)="addUpdatedItem($event)"
             *ngFor="let project of projects"
             [project]="project"
             [updateProject]="updateProject"

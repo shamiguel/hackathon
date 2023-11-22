@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -8,6 +8,7 @@ import { ProjectCardComponent } from './project-card/project-card.component';
 @Component({
   selector: 'app-projects',
   standalone: true,
+  providers: [EventEmitter],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, ProjectCardComponent],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.sass'
@@ -19,9 +20,18 @@ export class ProjectsComponent implements OnInit{
   isAdding: boolean; 
   techValues: string[];
 
-  constructor(private projectService: ProjectService, private http: HttpClient){
+  constructor(private projectService: ProjectService, private http: HttpClient, @Inject(EventEmitter) private eventEmitter: EventEmitter<IProject>){
     this.isAdding = false;
     this.techValues = [];
+  }
+
+  addUpdatedItem(updatedProject:IProject){
+    console.log(updatedProject)
+    
+      console.log("updating in progresss...")
+      const projectIndex = this.projects.findIndex((project) => project.id === updatedProject.id);
+      this.projects[projectIndex] = updatedProject
+  
   }
 
   ngOnInit(): void {
@@ -78,13 +88,14 @@ export class ProjectsComponent implements OnInit{
       this.projects.push(newProject)
       this.projectForm.reset();
       this.isAdding = false;
+      this.techValues = [];
     }, error=>{
       console.error("Post request error:", error)
     })
   }
 
   updateProject(project:any){
-    console.log("update:", project)
+    console.log("update:", event)
     this.projectService.update(project)
     .subscribe((response:any)=>{
       console.log('Project updated successfully:', response);
