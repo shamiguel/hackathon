@@ -15,6 +15,7 @@
 
 <ng-template #edit>
 <div class="project-card">
+    <button (click)="handleDelete()" type="button">Delete?</button>
     <form action="" (submit)="submitEdit()" [formGroup]="projectEditForm">
     <h2>Editing: {{project.projectTitle}}</h2>
     <button type="button" (click)="isEditing = !isEditing">Cancel?</button>

@@ -34,6 +34,13 @@ export class ProjectsComponent implements OnInit{
   
   }
 
+  removeDeletedItem(id:number){
+    this.projects = this.projects.filter((project) => {
+      project.id !== id
+    })
+    console.log("Successfully removed project")
+  }
+
   ngOnInit(): void {
    this.getProjects();
   }

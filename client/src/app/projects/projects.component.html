@@ -47,6 +47,7 @@
             <app-project-card
             [projects]="projects"
             (change)="addUpdatedItem($event)"
+            (delete)="removeDeletedItem($event)"
             *ngFor="let project of projects"
             [project]="project"
             [updateProject]="updateProject"

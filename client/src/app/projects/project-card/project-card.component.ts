@@ -17,6 +17,7 @@ export class ProjectCardComponent implements OnInit{
   @Input() removeTech!:(tech:string) => void;
   @Input() projects! : any[];
   @Output() change: EventEmitter<IProject> =  new EventEmitter<IProject>();
+  @Output() delete: EventEmitter<number> = new EventEmitter<number>
   isEditing = false;
   techValues:any;
   projectEditForm: FormGroup;
@@ -61,6 +62,22 @@ export class ProjectCardComponent implements OnInit{
     this.projectEditForm.controls["projectDescription"].setValue(this.project.projectDescription)
     this.projectEditForm.controls["projectTech"].setValue(this.project.projectTech)
     this.projectEditForm.controls["projectUrl"].setValue(this.project.projectUrl)
+  }
+
+  handleDelete(){
+    let response = prompt("Please enter the title of the project to confirm delete")
+    if(response == this.project.projectTitle){
+      this.submitDelete()
+    }
+  }
+
+  submitDelete(){
+    this.projectService.destroy(this.project.id)
+    .subscribe((data:any)=>{
+      console.log(data)
+      this.isEditing = false; 
+      this.delete.emit(this.project.id)
+    })
   }
 
 }
