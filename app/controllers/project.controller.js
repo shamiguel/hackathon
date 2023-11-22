@@ -56,10 +56,11 @@ const createProject = async (req, res) => {
 
   const deleteProject = async (req, res) => {
     try{
+      const id = req.params.id
       await Project.destroy({
-        where: {id: req.params.id}
+        where: {id: id}
       });
-      return res.status(201)
+      return res.status(201).json({id})
     }catch{
       console.error(error);
       return res.status(500).json({ error: error.message});

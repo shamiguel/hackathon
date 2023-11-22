@@ -34,11 +34,13 @@ export class ProjectsComponent implements OnInit{
   
   }
 
-  removeDeletedItem(id:number){
-    this.projects = this.projects.filter((project) => {
-      project.id !== id
-    })
-    console.log("Successfully removed project")
+  removeDeletedItem(id:any){
+    console.log(this.projects, id)
+    const remove = id
+    const removeId = parseInt(remove.id)
+    this.projects = this.projects.filter((p) => p.id !== removeId)
+    console.log("Successfully removed project", this.projects)
+
   }
 
   ngOnInit(): void {

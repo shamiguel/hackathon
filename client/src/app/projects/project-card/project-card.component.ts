@@ -76,7 +76,8 @@ export class ProjectCardComponent implements OnInit{
     .subscribe((data:any)=>{
       console.log(data)
       this.isEditing = false; 
-      this.delete.emit(this.project.id)
+      console.log("emitting...")
+      this.delete.emit(data)
     })
   }
 
