@@ -62,6 +62,7 @@ export class DialogAnimationsExampleDialog {
     @Output() loginChange = new EventEmitter<boolean>();
 
     constructor(
+      public dialog: MatDialog,
       public dialogRef: MatDialogRef<DialogAnimationsExampleDialog>,
       private fb:FormBuilder, 
       private authService: AuthService, 
@@ -94,6 +95,7 @@ export class DialogAnimationsExampleDialog {
               console.log("User is logged in", data)
               this.isLoggedIn = true;
               this.loginChange.emit(true)
+              this.dialog.closeAll()
             }
           }
         )
