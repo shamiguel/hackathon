@@ -3,8 +3,9 @@ const cors = require("cors");
 const projectController = require("./app/controllers/project.controller")
 const app = express();
 
+const PORT = process.env.PORT || 8080;
 var corsOptions = {
-  origin: ["http://localhost:8080","http://localhost:4200"],
+  origin: [`http://localhost:${PORT}`,`http://localhost:4200`],
 
 };
 
@@ -32,7 +33,7 @@ app.get("/", (req, res) => {
 });
 
 // set port, listen for requests
-const PORT = process.env.PORT || 8080;
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });

@@ -1,7 +1,10 @@
 const config = require("../config/db.config.js");
 
 const Sequelize = require("sequelize");
-const sequelize = new Sequelize(
+const sequelize = 
+  NODE_ENV === "production"
+  ?
+new Sequelize(
   config.DB,
   config.USER,
   config.PASSWORD,
@@ -15,7 +18,11 @@ const sequelize = new Sequelize(
       idle: config.pool.idle
     }
   }
-);
+) : new Sequelize(
+  `postgres://shamio:PZX1g7MCww6jE2nQCFGPOaUY8eNv9cbn@dpg-clif8358td7s73bvnk6g-a/hackathon_2f4x`
+)
+
+;
 
 const db = {};
 
