@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"node server.js\" \"cd client && ng serve\""
   },
   "keywords": [],
   "author": "",
@@ -27,6 +28,7 @@
     "sharp": "^0.32.6"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.201"
+    "@types/lodash": "^4.14.201",
+    "concurrently": "^8.2.2"
   }
 }
