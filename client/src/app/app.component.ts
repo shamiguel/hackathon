@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
@@ -10,7 +10,7 @@ import { TitleComponent } from './title/title.component';
 import { AboutComponent } from './about/about.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { ContactComponent } from './contact/contact.component';
-
+import { AuthService } from './auth.service';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -31,10 +31,12 @@ import { ContactComponent } from './contact/contact.component';
 export class AppComponent implements OnInit { 
   title = 'frontEnd'; 
   message: any; 
+  @Input() isLoggedIn: boolean = false;
   constructor(
     private apiService: ApiService,
     private scroller: ViewportScroller,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
     ) { }; 
 
   ngOnInit() { 
@@ -43,5 +45,16 @@ export class AppComponent implements OnInit {
           this.message = data; 
           console.log(this.message)
       }); 
+      console.log("Logged in: ", this.authService.isLoggedIn())
+      this.isLoggedIn = this.authService.isLoggedIn()
+      console.log(this.isLoggedIn)
   } 
+
+  onLoginStatusChange(newState: boolean){
+    this.isLoggedIn = newState;
+    console.log("App: Login Status changed to: ", newState)
+    if(!this.isLoggedIn){
+      this.authService.logout();
+    }
+  }
 }

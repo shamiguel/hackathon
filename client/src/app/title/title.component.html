@@ -3,4 +3,9 @@
       <h1>Shami Tomita</h1>
       <h3>Software Engineer</h3>
     </div>
+
+    <button *ngIf="!isLoggedIn; else logout" mat-raised-button (click)="openDialog('0ms', '0ms')">Sign In</button>
+    <ng-template #logout>
+      <button mat-raised-button (click)="handleLogout()">Logout</button>
+    </ng-template>
 </section>

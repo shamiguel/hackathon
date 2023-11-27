@@ -41,6 +41,8 @@ exports.signup = (req, res) => {
 };
 
 exports.signin = (req, res) => {
+  console.log("req.body")
+  console.log("********************IM HIT********************")
   User.findOne({
     where: {
       username: req.body.username
@@ -70,18 +72,20 @@ exports.signin = (req, res) => {
                                 allowInsecureKeySizes: true,
                                 expiresIn: 86400, // 24 hours
                               });
-
+      const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
       var authorities = [];
       user.getRoles().then(roles => {
         for (let i = 0; i < roles.length; i++) {
           authorities.push("ROLE_" + roles[i].name.toUpperCase());
         }
+        console.log("*******************LETS GOO****************")
         res.status(200).send({
           id: user.id,
           username: user.username,
           email: user.email,
           roles: authorities,
-          accessToken: token
+          accessToken: token,
+          exp: expiry
         });
       });
     })

@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Sign In</h1>
+<div mat-dialog-content>
+    <form [formGroup]="form" action="">
+        <label for="">Username</label>
+        <input formControlName="username" type="text">
+        <label for="">Password</label>
+        <input formControlName="password" type="password">
+        <br>
+        <div mat-dialog-actions>
+            <button mat-button type="submit" (click)="handleSubmit()">Submit</button>
+        </div>
+    </form>
+</div>
