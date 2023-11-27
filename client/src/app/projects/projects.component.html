@@ -2,7 +2,9 @@
     <h1>Projects</h1>
     <div class="project-org">
         <div class="project-select">
-        <button (click)="toggleAdding()">Add</button>
+        <div *ngIf="isLoggedIn">
+            <button (click)="toggleAdding()">Add</button>
+        </div>
         <ul>
             <li *ngFor="let project of projects">
                 <h3 (click)="toggleSelectedProject(project)">{{project.projectTitle}}</h3>
@@ -52,6 +54,7 @@
             [updateProject]="updateProject"
             [addTech]="addTech"
             [removeTech]="removeTech"
+            [isLoggedIn]="isLoggedIn"
             >
             </app-project-card>
         </div>

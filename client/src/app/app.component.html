@@ -6,7 +6,9 @@
       (loginChange)="onLoginStatusChange($event)"
     ></app-title>
     <app-about></app-about>
-    <app-projects></app-projects>
+    <app-projects
+    [isLoggedIn]="isLoggedIn"
+    ></app-projects>
     <app-contact></app-contact>
   </div>
 </div>

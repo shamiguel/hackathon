@@ -1,6 +1,8 @@
 <div class="project-card" *ngIf="!isEditing else edit">
     <h2>{{project.projectTitle}}</h2>
-    <button type="button" (click)="isEditing = !isEditing">Update?</button>
+    <div *ngIf="isLoggedIn">
+        <button type="button" (click)="isEditing = !isEditing">Update?</button>
+    </div>
     <p>{{project.projectDescription}}</p>
     <h3>Tech</h3>
     <ul>

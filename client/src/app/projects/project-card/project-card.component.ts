@@ -11,6 +11,7 @@ import { ProjectService } from '../project.service';
   styleUrl: './project-card.component.sass'
 })
 export class ProjectCardComponent implements OnInit{
+  @Input() isLoggedIn:boolean = false;
   @Input() project! : IProject
   @Input() updateProject!: (project:any) => void;
   @Input() addTech!:() => void;

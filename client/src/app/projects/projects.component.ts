@@ -14,9 +14,8 @@ import { ProjectCardComponent } from './project-card/project-card.component';
   styleUrl: './projects.component.sass'
 })
 export class ProjectsComponent implements OnInit{
-  //@Input() projects : Project[] = [];
-  //@Output() addProject = new EventEmitter<Project>();
   @Input() projects: IProject[] = [];
+  @Input() isLoggedIn: boolean = false;
   isAdding: boolean; 
   techValues: string[];
   selectedProject: IProject = this.projects[0];
