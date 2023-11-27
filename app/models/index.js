@@ -2,7 +2,7 @@ const config = require("../config/db.config.js");
 
 const Sequelize = require("sequelize");
 const sequelize = 
-  NODE_ENV === "production"
+  process.env.NODE_ENV === "development"
   ?
 new Sequelize(
   config.DB,
