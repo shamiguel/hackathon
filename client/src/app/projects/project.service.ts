@@ -3,8 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IProject } from '../../shared/models/project';
 import { Observable, BehaviorSubject, map } from 'rxjs';
 import * as _ from "lodash"
+import { PROJECT_URL } from '../../shared/urls';
 
-const baseUrl = 'http://localhost:8080/api/auth/projects'
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
@@ -19,22 +19,22 @@ export class ProjectService {
   ) {  }
 
   getAll(): any{
-    console.log(this.http.get<IProject[]>(baseUrl, httpOptions))
-    return this.http.get(baseUrl, httpOptions).pipe(map((data:any) => {
+    console.log(this.http.get<IProject[]>(PROJECT_URL, httpOptions))
+    return this.http.get(PROJECT_URL, httpOptions).pipe(map((data:any) => {
       return data.projects
     }))
   }
 
   create(data: any): Observable<any>{
-    return this.http.post(baseUrl, data, httpOptions);
+    return this.http.post(PROJECT_URL, data, httpOptions);
   }
 
   update(data: any): Observable<any>{
     console.log(data.value)
-    return this.http.put(baseUrl + `/${data.value.id}`, data.value, httpOptions);
+    return this.http.put(PROJECT_URL + `/${data.value.id}`, data.value, httpOptions);
   }
 
   destroy(id:any): Observable<any>{
-    return this.http.delete(baseUrl + `/${id}`, httpOptions)
+    return this.http.delete(PROJECT_URL + `/${id}`, httpOptions)
   }
 }

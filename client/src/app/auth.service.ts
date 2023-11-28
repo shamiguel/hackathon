@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { shareReplay } from 'rxjs';
 import {tap} from 'rxjs/operators';
 import moment from "moment";
+import { USER_SIGN_IN_URL } from '../shared/urls';
 
-const baseUrl = 'http://localhost:8080/api/auth/signin'
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
@@ -19,7 +19,7 @@ export class AuthService {
   constructor(private http: HttpClient) { }
   
   login(username:string, password:string){
-    return this.http.post(baseUrl, {username, password}, httpOptions)
+    return this.http.post(USER_SIGN_IN_URL, {username, password}, httpOptions)
     .pipe(
       tap(res => {
         this.setSession(res)}),

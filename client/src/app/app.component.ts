@@ -40,6 +40,7 @@ export class AppComponent implements OnInit {
     ) { }; 
 
   ngOnInit() { 
+    console.log(process.env['NODE_ENV']);
       this.router.navigate(["/"])
       this.apiService.getMessage().subscribe(data => { 
           this.message = data; 
