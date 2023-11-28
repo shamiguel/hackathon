@@ -8,6 +8,7 @@ var corsOptions = {
   origin: [`http://localhost:${PORT}`,`http://localhost:4200`],
 
 };
+console.log(process.env.DB_URI_INTERNAL);
 
 app.use(cors(corsOptions));
 
