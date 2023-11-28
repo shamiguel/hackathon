@@ -18,7 +18,7 @@ new Sequelize(
     }
   }
 ) : new Sequelize(
-  'postgres://shamio:PZX1g7MCww6jE2nQCFGPOaUY8eNv9cbn@dpg-clif8358td7s73bvnk6g-a.oregon-postgres.render.com/hackathon_2f4x'
+  'postgres://shamio:PZX1g7MCww6jE2nQCFGPOaUY8eNv9cbn@dpg-clif8358td7s73bvnk6g-a/hackathon_2f4x'
 )
 
 
