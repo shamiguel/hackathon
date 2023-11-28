@@ -18,7 +18,7 @@ new Sequelize(
     }
   }
 ) : new Sequelize(process.env.DB_URI_INTERNAL, {
-  dialect: 'postgres' // Specify the dialect here
+  dialect: 'postgres'
 });
 
 
