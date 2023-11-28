@@ -38,7 +38,6 @@ app.listen(PORT, () => {
   console.log("env", process.env.NODE_ENV)
   if(process.env.NODE_ENV === "production"){
     console.log(process.env.DB_URI_INTERNAL)
-  console.log(Url.parse(process.env.DB_URI_INTERNAL))
   }
   console.log(`Server is running on port ${PORT}.`);
 });
