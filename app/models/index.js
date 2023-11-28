@@ -17,9 +17,9 @@ new Sequelize(
       idle: config.pool.idle
     }
   }
-) : new Sequelize(
-  process.env.DB_URI_INTERNAL
-)
+) : new Sequelize(process.env.DB_URI_INTERNAL, {
+  dialect: 'postgres' // Specify the dialect here
+});
 
 
 
