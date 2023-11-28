@@ -3,7 +3,7 @@ const cors = require("cors");
 const projectController = require("./app/controllers/project.controller")
 const app = express();
 
-const PORT = 8080;
+const PORT = process.env.NODE_ENV === "development" ? 8080 : 5432
 var corsOptions = {
   origin: [`http://localhost:${PORT}`,`http://localhost:4200`],
 
