@@ -1,16 +1,21 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IProject } from '../../../shared/models/project';
 import { FormControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {MatButtonModule} from '@angular/material/button';
 import { ProjectService } from '../project.service';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
+
 @Component({
   selector: 'app-project-card',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule],
   templateUrl: './project-card.component.html',
   styleUrl: './project-card.component.sass'
 })
-export class ProjectCardComponent implements OnInit{
+export class ProjectCardComponent implements OnChanges{
   @Input() isLoggedIn:boolean = false;
   @Input() project! : IProject
   @Input() updateProject!: (project:any) => void;
@@ -23,8 +28,8 @@ export class ProjectCardComponent implements OnInit{
   techValues:any;
   projectEditForm: FormGroup;
 
-  ngOnInit(): void {
-    this.techValues = [this.project.projectTech]
+  ngOnChanges(): void {
+    this.techValues = this.project.projectTech
     this.projectEditForm = this.fb.group({
       id: new FormControl(),
       projectTitle: new FormControl('', Validators.required),

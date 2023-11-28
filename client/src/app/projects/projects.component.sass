@@ -4,13 +4,36 @@
     scroll-margin-top: 700px
     height:91vh
 
+#project-title
+    font-size: 2rem
+    float: right
+    color: #0A3EA6
+    font-style: italic
+    margin-left: 20px
+
+    
 .project-select
-    width:30%
+    width:20%
+    
     height: 75.4vh
-    padding-top: 40px
-    align-items: center
+    margin-top: 40px
+    
     border:#0A3EA6
-    border-style: dashed
+   
+    overflow: auto
+
+ul
+    list-style: none
+    margin-left: -20px
+
+ul > li 
+    font-size: 1rem
+    padding-right: 10px
+
+ul > li:hover 
+    font-style: italic 
+    color: #0A3EA6 
+    font-weight: 900
 
 .project-org
     display: flex
@@ -18,19 +41,42 @@
     overflow: hidden
 
 .project-container
-   overflow-y: auto
-   width:70%
+   overflow-x: hidden
+   width:80%
    height:100%
-
-.project-card
-   padding: 10px
-   height: 70vh
-   border:#0A3EA6
-   border-style: dashed
+   overflow-x: hidden
 
 .project-form 
    width: 70%
-   padding: 10px
+   padding: 20px
    height: 650px
    border:#0A3EA6
-   border-style: dashed
+
+.project-form > h2 
+    font-size: 2rem
+    color: #0A3EA6
+    font-style: italic
+
+.techChoices 
+   list-style: none
+
+.techChoices > ul 
+   display: flex 
+   flex-direction: row 
+   padding-top: 5px
+
+.techChoices > div:hover 
+   color: red
+   font-weight: 900
+ 
+.button-li
+    display: flex 
+    flex-direction: row
+    align-content: center
+    text-align: center
+.button-li > button:hover 
+    color: red     
+.button-li >li 
+    display: flex 
+    justify-content: center
+    align-content: center

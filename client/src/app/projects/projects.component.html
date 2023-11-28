@@ -1,9 +1,9 @@
 <section id="project" class="projects">
-    <h1>Projects</h1>
+    <h1 id="project-title">Projects</h1>
     <div class="project-org">
         <div class="project-select">
         <div *ngIf="isLoggedIn">
-            <button (click)="toggleAdding()">Add</button>
+            <button mat-raised-button (click)="toggleAdding()">Add</button>
         </div>
         <ul>
             <li *ngFor="let project of projects">
@@ -15,28 +15,39 @@
         <div class="project-form"*ngIf="isAdding; else display">
             <h2>Add a Project</h2>
             <form [formGroup]="projectForm" (submit)="submitProject()">
-                <label for="">Title</label>
-                <input formControlName="projectTitle" type="text" name="title">
+                <mat-form-field>
+                <mat-label for="">Title</mat-label>
+                <input matInput formControlName="projectTitle" type="text" name="title">
+                </mat-form-field>
                 <br>
-                <label for="">Description</label>
-                <input formControlName="projectDescription" type="text" name="desc">
+                <mat-form-field>
+                <mat-label for="">Description</mat-label>
+                <textarea matInput formControlName="projectDescription" type="text" name="desc"></textarea>
+                </mat-form-field>
                 <br>
                 <div>
-                    <label for="">Tech</label>
-                    <input type="text" name="addTech" id="addTechInput">
-                    <button type="button" (click)="$event.preventDefault; addTech()">Add Tech</button>
-                    <br>
-                    <div id="techChoices" *ngFor="let tech of techValues">
-                        <li>{{tech}} <button type="button" (click)="removeTech(tech)">X</button></li>
-                    </div>
-                    <input type="hidden" formControlName="projectTech" name="tech" value="{{techValues}}">
-
+                    <mat-form-field>
+                        <mat-label>Tech</mat-label>
+                        <input matInput type="text" name="addTech" id="addTechInput">
+                        
+                    </mat-form-field>
+                    <button mat-raised-button type="button" (click)="$event.preventDefault; addTech()">Add Tech</button>
+                      <div class="techChoices">
+                        <ul >
+                            <div class="button-li" *ngFor="let tech of techValues">
+                                <button mat-raised-button type="button"(click)="removeTech(tech)">X</button> 
+                                <li>{{tech}}</li>
+                            </div>
+                         </ul>
+                      </div>   
+                        <input  type="hidden" formControlName="projectTech" name="tech" value="{{techValues}}">
+                       
                 </div>
-                <br>
-                <label for="">URL</label>
-                <input formControlName="projectUrl" type="url" name="url">
-                <br>
+                <mat-form-field> 
+                    <mat-label>Github/Url</mat-label><input matInput type="text" formControlName="projectUrl">
+                </mat-form-field>
                 <button 
+                mat-button
                 type="submit"
                 class="btn btn-primary"
                 [disabled]="projectForm.invalid || techValues.length < 1"

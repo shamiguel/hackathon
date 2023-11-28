@@ -4,12 +4,17 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ProjectService } from './project.service';
 import { IProject } from '../../shared/models/project';
+import {MatButtonModule} from '@angular/material/button';
 import { ProjectCardComponent } from './project-card/project-card.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
+
 @Component({
   selector: 'app-projects',
   standalone: true,
   providers: [EventEmitter],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, ProjectCardComponent],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, ProjectCardComponent, MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.sass'
 })
@@ -58,8 +63,11 @@ export class ProjectsComponent implements OnInit{
         const data = item.dataValues 
         const project = new IProject(data.id, data.title, data.description, data.tech, data.github)
         this.projects.push(project)
+        console.log(projects.indexOf(item))
+        if(projects.indexOf(item) === 0){
+          this.selectedProject = project
+        }
         //can only initialize like this for some reason?
-        this.selectedProject = project
       }
     })
   }

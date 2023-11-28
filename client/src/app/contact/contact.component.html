@@ -1,16 +1,22 @@
 <section id="contact" class="contact">
     <h1>CONTACT!</h1>
     <form action="">
-      <label for="">Name</label>
-      <input type="text">
+      <mat-form-field>
+        <mat-label for="">Name</mat-label>
+        <input matInput type="text">
+      </mat-form-field>
       <br>
-      <label for="">Email</label>
-      <input type="text">
+      <mat-form-field>
+        <mat-label for="">Email</mat-label>
+        <input matInput type="text">
+      </mat-form-field>
       <br>
-      <label for="">message</label>
-      <textarea name="message" cols="30" rows="10"></textarea>
+      <mat-form-field>
+        <mat-label for="">Message</mat-label>
+        <textarea matInput type="text" cols="30" rows="10"></textarea>
+      </mat-form-field>
       <br>
-      <button type="submit">Send!</button>
+      <button mat-button type="submit">Send!</button>
       <br>
     </form>
 </section>
