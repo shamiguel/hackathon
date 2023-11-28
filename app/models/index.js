@@ -18,10 +18,22 @@ new Sequelize(
     }
   }
 ) : new Sequelize(
-  `postgres://shamio:PZX1g7MCww6jE2nQCFGPOaUY8eNv9cbn@dpg-clif8358td7s73bvnk6g-a/hackathon_2f4x`
-)
+  "hackathon_2f4x",
+  "shamio",
+  "PZX1g7MCww6jE2nQCFGPOaUY8eNv9cbn",
+  {
+    host: "dpg-clif8358td7s73bvnk6g-a",
+    dialect: "postgres",
+    pool: {
+      max: 5,
+      min: 0,
+      acquire: 30000,
+      idle: 10000
+    }
+  }
+);
 
-;
+
 
 const db = {};
 
