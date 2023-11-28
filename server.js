@@ -35,7 +35,9 @@ app.get("/", (req, res) => {
 // set port, listen for requests
 
 app.listen(PORT, () => {
-  console.log(process.env.PORT)
+  if(process.env.NODE_ENV === "production"){
+  console.log(process.env.DB_URI_INTERNAL)
+  }
   console.log(`Server is running on port ${PORT}.`);
 });
 
