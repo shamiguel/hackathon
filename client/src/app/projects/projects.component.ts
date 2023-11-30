@@ -49,7 +49,7 @@ export class ProjectsComponent implements OnInit{
     const removeId = parseInt(remove.id)
     this.projects = this.projects.filter((p) => p.id !== removeId)
     console.log("Successfully removed project", this.projects)
-
+    this.selectedProject = this.projects[0]
   }
 
   ngOnInit(): void {
