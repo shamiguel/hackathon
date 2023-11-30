@@ -56,6 +56,7 @@ export class ProjectCardComponent implements OnChanges{
       const updatedProject = new IProject(response.id, response.title, response.description, response.tech, response.github)
       console.log(updatedProject)
       this.change.emit(updatedProject)
+      this.project = updatedProject
     })
     this.projectEditForm.reset()
     this.isEditing = false; 

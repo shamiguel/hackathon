@@ -118,7 +118,7 @@ export class ProjectsComponent implements OnInit{
   }
 
   updateProject(project:any){
-    console.log("update:", event)
+    console.log("update:", project)
     this.projectService.update(project)
     .subscribe((response:any)=>{
       console.log('Project updated successfully:', response);
