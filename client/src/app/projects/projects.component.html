@@ -2,14 +2,14 @@
     <h1 id="project-title">Projects</h1>
     <div class="project-org">
         <div class="project-select">
-        <div *ngIf="isLoggedIn">
-            <button mat-raised-button (click)="toggleAdding()">Add</button>
-        </div>
-        <ul>
-            <li *ngFor="let project of projects">
-                <h3 (click)="toggleSelectedProject(project)">{{project.projectTitle}}</h3>
-            </li>
-        </ul>
+            <div class="add" *ngIf="isLoggedIn">
+                <button  mat-raised-button (click)="toggleAdding()">Add</button>
+            </div>
+            <ul>
+                <li *ngFor="let project of projects">
+                    <h3 (click)="toggleSelectedProject(project)">{{project.projectTitle}}</h3>
+                </li>
+            </ul>
         </div>
 
         <div class="project-form"*ngIf="isAdding; else display">
